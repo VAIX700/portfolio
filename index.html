@@ -3,46 +3,109 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My Portfolio</title>
+  <title>Portfolio-Vaishav Rajesh</title>
   <style>
+    :root {
+      --bg: #18181b;
+      --container-bg: #23232a;
+      --accent: #00ffe7;
+      --text: #e0e0e0;
+      --header-bg: #1f1f23;
+      --nav-bg: #23232a;
+      --shadow: 0 2px 16px rgba(0,255,231,0.08);
+      --purple: #a259ff;
+      --blue: #0099ff;
+    }
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Orbitron', Arial, sans-serif;
       margin: 0;
-      background: #f4f4f4;
-      color: #333;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.5s, color 0.5s;
     }
     header {
-      background: #222;
-      color: #fff;
+      background: var(--header-bg);
+      color: var(--accent);
       padding: 2rem 0;
       text-align: center;
+      letter-spacing: 2px;
+      box-shadow: var(--shadow);
+      animation: neonGlow 2s infinite alternate;
+    }
+    @keyframes neonGlow {
+      from { text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent); }
+      to { text-shadow: 0 0 30px var(--accent), 0 0 60px var(--accent); }
     }
     nav {
-      background: #444;
+      background: var(--nav-bg);
       padding: 1rem;
       text-align: center;
+      box-shadow: var(--shadow);
     }
     nav a {
-      color: #fff;
+      color: var(--accent);
       margin: 0 1rem;
       text-decoration: none;
       font-weight: bold;
+      background: linear-gradient(90deg, var(--purple), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      position: relative;
+      transition: color 0.3s;
+    }
+    nav a::after {
+      content: '';
+      display: block;
+      height: 2px;
+      width: 0;
+      background: var(--accent);
+      transition: width 0.3s;
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+    }
+    nav a:hover {
+      color: #fff;
+    }
+    nav a:hover::after {
+      width: 100%;
     }
     .container {
       max-width: 900px;
       margin: 2rem auto;
-      background: #fff;
+      background: var(--container-bg);
       padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      animation: fadeIn 1.2s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
     }
     section {
       margin-bottom: 2rem;
+      animation: slideUp 1s;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: translateY(0);}
     }
     h2 {
-      color: #222;
-      border-bottom: 2px solid #eee;
+      color: var(--accent);
+      border-bottom: 2px solid #333;
       padding-bottom: 0.5rem;
+      font-family: 'Orbitron', Arial, sans-serif;
+      letter-spacing: 1px;
+      text-shadow: 0 0 8px var(--accent);
+      animation: neonGlow 2s infinite alternate;
+      background: linear-gradient(90deg, var(--purple), var(--blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
     }
     ul {
       list-style: none;
@@ -50,19 +113,92 @@
     }
     ul li {
       margin-bottom: 0.5rem;
+      padding-left: 1.2em;
+      position: relative;
+      color: var(--purple);
+      background: linear-gradient(90deg, var(--purple), var(--blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
+    ul li::before {
+      content: "▶";
+      color: var(--accent);
+      position: absolute;
+      left: 0;
+      font-size: 1em;
+      animation: blink 1.5s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1;}
+      50% { opacity: 0.5;}
     }
     .project {
       margin-bottom: 1.5rem;
+      background: #20202a;
+      border-left: 4px solid var(--accent);
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,255,231,0.05);
+      animation: fadeIn 1.5s;
+      transition: transform 0.3s;
+    }
+    .project:hover {
+      transform: scale(1.03) rotate(-1deg);
+      box-shadow: 0 4px 24px var(--accent);
     }
     .project-title {
       font-weight: bold;
+      color: var(--accent);
+      font-family: 'Orbitron', Arial, sans-serif;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, var(--purple), var(--blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
     }
+    a {
+      color: var(--accent);
+      transition: color 0.3s;
+      background: linear-gradient(90deg, var(--purple), var(--blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px var(--accent);
+      background: none;
+      -webkit-background-clip: initial;
+      -webkit-text-fill-color: initial;
+      background-clip: initial;
+      text-fill-color: initial;
+    }
+    /* Add a gaming-style background animation */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: -1;
+      background: repeating-linear-gradient(135deg, #23232a 0 2px, transparent 2px 20px);
+      opacity: 0.2;
+      animation: bgMove 10s linear infinite;
+    }
+    @keyframes bgMove {
+      0% { background-position: 0 0;}
+      100% { background-position: 200px 200px;}
+    }
+    /* Orbitron font for gaming feel */
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
   </style>
 </head>
 <body>
   <header>
-    <h1>Your Name</h1>
-    <p>Web Developer | Designer | Programmer</p>
+    <h1>Vaishnav Rajesh</h1>
+    <p>Web Developer | Drummer | Guitarist</p>
   </header>
   <nav>
     <a href="#about">About</a>
@@ -74,7 +210,7 @@
     <section id="about">
       <h2>About Me</h2>
       <p>
-        Write a short introduction about yourself, your background, and your interests.
+        I’m Vaishnav Rajesh, a passionate game developer, web developer, drummer, guitarist and founder of WarpXgaming. I specialize in building immersive digital experiences—from web applications to full-scale games—using technologies like HTML, CSS, JavaScript, and Python. Beyond coding, I’m also a musician who enjoys drumming and guitar, bringing creativity and rhythm into everything I create. My goal is to design innovative platforms that merge gaming, technology, and entertainment into one seamless experience.
       </p>
     </section>
     <section id="skills">
@@ -90,18 +226,24 @@
       <h2>Projects</h2>
       <div class="project">
         <span class="project-title">Project One</span>
-        <p>Short description of your project. <a href="#">View on GitHub</a></p>
+        <p>The main gaming application of my company. <a href="https://vaix700.github.io/warpXgaming/">View online</a></p>
       </div>
       <div class="project">
         <span class="project-title">Project Two</span>
-        <p>Short description of your project. <a href="#">View on GitHub</a></p>
+        <p>Portfolio.Vaishnav-Rajesh.<a 
+        
+    
+                 href="https://vaix700.github.io/porfolio/">View online</a></p>
+        
       </div>
     </section>
     <section id="contact">
       <h2>Contact</h2>
-      <p>Email: your.email@example.com</p>
-      <p>LinkedIn: <a href="#">Your LinkedIn Profile</a></p>
-    </section>
+      <h3>Feel free to reach out to me via email or Discord!</h3>
+      <p>Email: vaishnav04032014@gmail.com</p>
+      <p>Email:vaishnav04032014@outlook.com</p>
+      <p>Discord-Username:blackyoda_86
+        </section>
   </div>
 </body>
 </html>
