@@ -290,8 +290,115 @@
       <p>Discord-Username:blackyoda_86
         </section>
   </div>
+  <!-- Contact Form -->
+<form id="contact-form" 
+  style="display:flex; flex-direction:column; gap:18px; margin-top:20px; align-items:center; width:100%;">
+  
+  <input type="text" id="name" name="Name" placeholder="Your Name" required
+    style="padding:14px; border:none; border-radius:10px; background:#222; color:#e0e0e0; font-size:1rem; box-shadow:0 2px 10px rgba(0,255,231,0.08); outline:none; transition:0.3s; width:90%; max-width:600px;">
+  
+  <input type="email" id="email" name="Email" placeholder="Your Email" required
+    style="padding:14px; border:none; border-radius:10px; background:#222; color:#e0e0e0; font-size:1rem; box-shadow:0 2px 10px rgba(0,255,231,0.08); outline:none; transition:0.3s; width:90%; max-width:600px;">
+  
+  <input type="text" id="subject" name="Subject" placeholder="Subject" required
+    style="padding:14px; border:none; border-radius:10px; background:#222; color:#e0e0e0; font-size:1rem; box-shadow:0 2px 10px rgba(0,255,231,0.08); outline:none; transition:0.3s; width:90%; max-width:600px;">
+  
+  <textarea id="message" name="Message" placeholder="Your Message" rows="5" required
+    style="padding:14px; border:none; border-radius:10px; background:#222; color:#e0e0e0; font-size:1rem; box-shadow:0 2px 10px rgba(0,255,231,0.08); outline:none; resize:none; transition:0.3s; width:90%; max-width:600px;"></textarea>
+  
+  <!-- Button -->
+  <button type="button" id="sendBtn"
+    style="padding:14px; border:none; border-radius:10px; background:linear-gradient(90deg,black,#0099ff); color:#fff; font-size:1rem; font-weight:bold; cursor:pointer; box-shadow:0 4px 16px rgba(0,255,231,0.15); transition:transform 0.2s, box-shadow 0.3s; display:flex; align-items:center; justify-content:center; gap:8px; width:90%; max-width:600px;">
+    <i class="fa fa-paper-plane"></i> SEND MESSAGE
+  </button>
+</form>
+
+<!-- Popup -->
+<div id="errorPopup" 
+  style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#111; color:#fff; padding:20px 25px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.4); z-index:1000; text-align:center; font-size:0.95rem; max-width:320px; width:90%;">
+  <p style="margin:0; font-weight:bold; color:#ff4d4d;">⚠️ Error detected</p>
+  <p style="margin:8px 0 0; font-size:0.9rem;">Please try email:<br>
+    <b>Vaishnav04032014@gmail.com</b><br>
+    <b>Vaishnav04032014@outlook.com</b>
+  </p>
+  <button onclick="closePopup()" 
+    style="margin-top:14px; padding:8px 14px; border:none; border-radius:8px; background:#0099ff; color:#fff; font-weight:bold; cursor:pointer;">
+    OK
+  </button>
+</div>
+
+<!-- Custom Alert -->
+<div id="customAlert" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(0.9); background:#1a1a1a; color:#fff; padding:20px 25px; border-radius:14px; box-shadow:0 0 25px rgba(0,153,255,0.5), 0 0 10px rgba(0,255,231,0.4); z-index:2000; text-align:center; font-size:1rem; max-width:360px; width:90%; transition:all 0.2s ease;">
+  <p id="alertMsg" style="margin:0; color:#ff4d4d; font-weight:bold; font-size:1.05rem;">⚠️ Alert</p>
+  <button onclick="closeCustomAlert()" 
+    style="margin-top:14px; padding:8px 16px; border:none; border-radius:10px; background:linear-gradient(90deg,#0099ff,#00ffe7); color:#111; font-weight:bold; cursor:pointer; box-shadow:0 0 10px rgba(0,153,255,0.7);">
+    OK
+  </button>
+</div>
+
+<!-- Dark overlay -->
+<div id="overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:1500;"></div>
+
+<script>
+  const sendBtn = document.getElementById("sendBtn");
+  const popup = document.getElementById("errorPopup");
+  const overlay = document.getElementById("overlay");
+  const customAlert = document.getElementById("customAlert");
+  const alertMsg = document.getElementById("alertMsg");
+
+  function showCustomAlert(message) {
+    alertMsg.innerText = message;
+    customAlert.style.display = "block";
+    overlay.style.display = "block";
+    customAlert.style.transform = "translate(-50%,-50%) scale(1)";
+  }
+
+  function closeCustomAlert() {
+    customAlert.style.display = "none";
+    overlay.style.display = "none";
+  }
+
+  sendBtn.addEventListener("click", () => {
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const subject = document.getElementById("subject").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    // Check for empty fields
+    if (!name || !email || !subject || !message) {
+      showCustomAlert("⚠️ Please fill in all fields before sending.");
+      return;
+    }
+
+    // Check email validity
+    if (!(email.includes("@") && email.includes(".com"))) {
+      showCustomAlert("⚠️ Please enter a valid email (must include @ and .com).");
+      return;
+    }
+
+    // If all good, show error popup
+    popup.style.display = "block";
+    overlay.style.display = "block";
+  });
+
+  function closePopup() {
+    popup.style.display = "none";
+    overlay.style.display = "none";
+  }
+
+  overlay.addEventListener("click", () => {
+    popup.style.display = "none";
+    customAlert.style.display = "none";
+    overlay.style.display = "none";
+  });
+</script>
+<br>
+<br>
+<br>
+
   <footer>
-  &copy; <span id="year"></span> Portfolio-Vaishnav Rajesh. All rights reserved.
+  
+    &copy; <span id="year"></span> Portfolio-Vaishnav Rajesh. All rights reserved.
   </footer>
 </body>
 </html>
